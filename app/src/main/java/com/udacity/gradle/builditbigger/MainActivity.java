@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ProgressBar;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -45,7 +46,8 @@ public class MainActivity extends AppCompatActivity {
     public void tellJoke(View view) {
 
         // new JokesEndpointsAsyncTask().execute(new Pair<Context, String>(this, "Anirudha"));
-        new JokesEndpointsAsyncTask(this).execute(this);
+        ProgressBar progressBar = (ProgressBar) findViewById(R.id.progressbar);
+        new JokesEndpointsAsyncTask(this,progressBar).execute(this);
 
         // new JokesEndpointsAsyncTask().setActivity(this);
 

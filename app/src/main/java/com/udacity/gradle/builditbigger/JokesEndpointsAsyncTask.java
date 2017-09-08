@@ -4,8 +4,8 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
-import android.support.v4.util.Pair;
-import android.widget.Toast;
+import android.view.View;
+import android.widget.ProgressBar;
 
 import com.example.aniru.myapplication.backend.myApi.MyApi;
 import com.example.displayjokesandroidlibrary.MainActivityinAndroidLib;
@@ -22,21 +22,23 @@ import java.io.IOException;
  * Created by aniru on 9/7/2017.
  */
 
-class JokesEndpointsAsyncTask extends AsyncTask<Context, Void, String> {
+public class JokesEndpointsAsyncTask extends AsyncTask<Context, Void, String> {
     private static MyApi myApiService = null;
-    private Context context;
+    private Context mContext;
 
-    private Activity activity;
+    private Activity mActivity;
+    private ProgressBar mProgressBar;
 
-    public JokesEndpointsAsyncTask(Activity a) {
-        activity = a;
+    public JokesEndpointsAsyncTask(Activity a, ProgressBar pb) {
+        mActivity = a;
+        mProgressBar = pb;
     }
 
     @Override
     protected void onPreExecute() {
         super.onPreExecute();
-
-
+        if (mProgressBar != null)
+            mProgressBar.setVisibility(View.VISIBLE);
     }
 
     @Override
@@ -70,8 +72,7 @@ class JokesEndpointsAsyncTask extends AsyncTask<Context, Void, String> {
             myApiService = builder.build();
         }
 
-        context = params[0];
-        // String name = params[0].second;
+        mContext = params[0];
 
         try {
 
@@ -88,10 +89,14 @@ class JokesEndpointsAsyncTask extends AsyncTask<Context, Void, String> {
 
     @Override
     protected void onPostExecute(String result) {
-        // Toast.makeText(context, result, Toast.LENGTH_LONG).show();
-        Intent intent = new Intent(context,MainActivityinAndroidLib.class);
+
+        if (mProgressBar != null)
+            mProgressBar.setVisibility(View.GONE);
+
+        // Toast.makeText(mContext, result, Toast.LENGTH_LONG).show();
+        Intent intent = new Intent(mContext,MainActivityinAndroidLib.class);
         intent.putExtra("MyJoke",result);
 
-        activity.startActivity(intent);
+        mActivity.startActivity(intent);
     }
 }

@@ -7,7 +7,11 @@ import android.support.test.runner.AndroidJUnit4;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import static android.support.test.InstrumentationRegistry.getContext;
 import static org.junit.Assert.*;
+
+import com.example.*;
+
 
 /**
  * Instrumentation test, which will execute on an Android device.
@@ -23,4 +27,10 @@ public class ExampleInstrumentedTest {
 
         assertEquals("com.example.displayjokesandroidlibrary.test", appContext.getPackageName());
     }
+
+    @Test
+    public void testJokes(){
+
+    }
+
 }
