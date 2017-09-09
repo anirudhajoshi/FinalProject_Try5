@@ -1,5 +1,4 @@
-
-package com.udacity.gradle.builditbigger;
+package builditbigger;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -8,17 +7,24 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ProgressBar;
 
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.InterstitialAd;
+import com.udacity.gradle.builditbigger.JokesEndpointsAsyncTask;
+import com.udacity.gradle.builditbigger.R;
+
 
 public class MainActivity extends AppCompatActivity {
+
+    private InterstitialAd mInterstitialAd;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // MyJokes jokes = new MyJokes();
-        // new JokesEndpointsAsyncTask().execute(new Pair<Context, String>(this, "Anirudha"));
-        // new JokesEndpointsAsyncTask().execute(new Pair<Context, String>(this, jokes.tellJoke()));
+        mInterstitialAd = new InterstitialAd(this);
+        mInterstitialAd.setAdUnitId("ca-app-pub-3940256099942544/1033173712");
+        mInterstitialAd.loadAd(new AdRequest.Builder().build());
     }
 
 
@@ -47,19 +53,11 @@ public class MainActivity extends AppCompatActivity {
     public void tellJoke(View view) {
 
         // new JokesEndpointsAsyncTask().execute(new Pair<Context, String>(this, "Anirudha"));
+        if (mInterstitialAd.isLoaded())
+            mInterstitialAd.show();
+
         ProgressBar progressBar = (ProgressBar) findViewById(R.id.progressbar);
         new JokesEndpointsAsyncTask(this,progressBar).execute(this);
 
-        // new JokesEndpointsAsyncTask().setActivity(this);
-
-        // MyJokes jokes = new MyJokes();
-        // Intent intent = new Intent(this,MainActivityinAndroidLib.class);
-        // intent.putExtra("MyJoke",jokes.tellJoke());
-        // startActivity(intent);
-
-        // Toast.makeText(this, jokes.tellJoke(), Toast.LENGTH_LONG).show();
-        // Toast.makeText(this, "derp", Toast.LENGTH_SHORT).show();
     }
-
-
 }

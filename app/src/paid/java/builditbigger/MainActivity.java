@@ -1,5 +1,4 @@
-
-package com.udacity.gradle.builditbigger;
+package builditbigger;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -7,6 +6,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ProgressBar;
+
+import com.udacity.gradle.builditbigger.JokesEndpointsAsyncTask;
+import com.udacity.gradle.builditbigger.R;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -47,15 +49,17 @@ public class MainActivity extends AppCompatActivity {
     public void tellJoke(View view) {
 
         // new JokesEndpointsAsyncTask().execute(new Pair<Context, String>(this, "Anirudha"));
+
         ProgressBar progressBar = (ProgressBar) findViewById(R.id.progressbar);
         new JokesEndpointsAsyncTask(this,progressBar).execute(this);
 
         // new JokesEndpointsAsyncTask().setActivity(this);
 
-        // MyJokes jokes = new MyJokes();
-        // Intent intent = new Intent(this,MainActivityinAndroidLib.class);
-        // intent.putExtra("MyJoke",jokes.tellJoke());
-        // startActivity(intent);
+/*        MyJokes jokes = new MyJokes();
+
+        Intent intent = new Intent(this,MainActivityinAndroidLib.class);
+        intent.putExtra("MyJoke",jokes.tellJoke());
+        startActivity(intent);*/
 
         // Toast.makeText(this, jokes.tellJoke(), Toast.LENGTH_LONG).show();
         // Toast.makeText(this, "derp", Toast.LENGTH_SHORT).show();

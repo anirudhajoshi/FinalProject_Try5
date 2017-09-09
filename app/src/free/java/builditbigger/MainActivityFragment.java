@@ -1,4 +1,4 @@
-package com.udacity.gradle.builditbigger;
+package builditbigger;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -9,8 +9,8 @@ import android.widget.Toast;
 
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
+import com.udacity.gradle.builditbigger.R;
 
-import com.example.MyJokes;
 
 /**
  * A placeholder fragment containing a simple view.

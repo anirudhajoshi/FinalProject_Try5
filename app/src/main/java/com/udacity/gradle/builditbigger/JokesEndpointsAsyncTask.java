@@ -34,6 +34,10 @@ public class JokesEndpointsAsyncTask extends AsyncTask<Context, Void, String> {
         mProgressBar = pb;
     }
 
+    public JokesEndpointsAsyncTask() {
+
+    }
+
     @Override
     protected void onPreExecute() {
         super.onPreExecute();
@@ -72,11 +76,11 @@ public class JokesEndpointsAsyncTask extends AsyncTask<Context, Void, String> {
             myApiService = builder.build();
         }
 
-        mContext = params[0];
-
         try {
 
-            // return myApiService.sayHi("test").execute().getData();
+            if( params.length>0)
+                mContext = params[0];
+
             return myApiService.getJoke().execute().getData();
 
         } catch (IOException e) {
@@ -94,9 +98,11 @@ public class JokesEndpointsAsyncTask extends AsyncTask<Context, Void, String> {
             mProgressBar.setVisibility(View.GONE);
 
         // Toast.makeText(mContext, result, Toast.LENGTH_LONG).show();
-        Intent intent = new Intent(mContext,MainActivityinAndroidLib.class);
-        intent.putExtra("MyJoke",result);
+        if( mContext!=null ) {
+            Intent intent = new Intent(mContext, MainActivityinAndroidLib.class);
+            intent.putExtra("MyJoke", result);
 
-        mActivity.startActivity(intent);
+            mActivity.startActivity(intent);
+        }
     }
 }
